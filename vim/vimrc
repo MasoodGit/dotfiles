@@ -1,0 +1,239 @@
+
+" make vim not compatible with vi
+set nocompatible
+
+" auto detect filetype and load plugins for them
+filetype on
+filetype plugin on
+filetype indent on
+
+" turn syntax highlighting
+syntax on
+
+" show numbers and relative numbers
+set number relativenumber
+
+" autoreload files changed outside vim
+set autoread
+
+" encoding to utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+
+" Stop vim from creating automatic backups
+set noswapfile
+set nobackup
+set nowb
+
+" replace tabs with spaces "
+set expandtab
+set smarttab
+
+" make tabs 2 spaces wide
+set softtabstop=2
+set tabstop=2
+set shiftwidth=2
+
+" autodent block of code
+set autoindent
+set smartindent
+
+
+" Auto indent pasted text
+nnoremap p p=`]<C-o>
+nnoremap P P=`]<C-o>
+
+" allow normal mode to autocomplete paths using tab like bash does
+set wildmenu
+set wildmode=list:longest
+
+" show tabs and trailings spaces 
+set list listchars=tab:→\ ,trail:·
+
+" Shift+Tab unindents a line "
+imap <S-Tab> <Esc><<i
+nmap <S-tab> <<
+
+" enable matchit plugin which ships with vim and greatly enhances '%'
+runtime macros/matchit.vim
+
+" by default, in insert mode backspace won't delete over line breaks, or 
+" automatically-inserted indentation, let's change that
+set backspace=indent,eol,start
+
+" dont't unload buffers when they are abandoned, instead stay in the
+" background
+set hidden
+
+" set unix line endings
+set fileformat=unix
+" when reading files try unix line endings then dos, also use unix for new
+" buffers
+set fileformats=unix,dos
+
+" save up to 100 marks, enable capital marks
+set viminfo='100,f1
+
+" screen will not be redrawn while running macros, registers or other
+" non-typed comments
+set lazyredraw
+
+" CUSTUMIZATIONS
+" ================================================
+" 
+
+" uppercase the current word
+:imap <c-u> <esc>viwUi
+:nmap <c-u> viwU
+
+" my leader key
+:let mapleader = ","
+
+" Unmap the arrow keys
+no <down> <Nop>
+no <left> <Nop>
+no <right> <Nop>
+no <up> <Nop>
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <Nop>
+ino <up> <Nop>
+
+ino <F1> <ESC>
+no <F1> <ESC>
+vno <F1> <ESC>
+
+" make semicolon behave as :
+nnoremap ; :
+
+"move between the split panes
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+set splitbelow
+set splitright
+
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+
+"==============================================
+"PluginG by Vundle
+"==============================================
+"
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+
+Plugin 'ternjs/tern_for_vim'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'editorconfig-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/NERDTree'
+Plugin 'scrooloose/syntastic'
+Plugin 'Tabular'
+Plugin 'pangloss/vim-javascript'
+Plugin 'burnettk/vim-angular'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'claco/jasmine.vim'
+Plugin 'crusoexia/vim-monokai'
+Plugin 'christoomey/vim-tmux-navigator'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+"===============================================================
+"key mappings settings
+"===============================================================
+
+
+"============================================================================
+"NERDTree settings
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden = 1 
+
+"============================================================================
+"
+"ctrlp
+"============================================================================
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit':  'BrightHighlightOff', }
+
+function BrightHighlightOn()
+  hi CursorLine guibg=darkred
+endfunction
+
+function BrightHighlightOff()
+  hi CursorLine guibg=#191919
+endfunction
+
+"===========================================================================
+" auto complete menu options
+"===========================================================================
+set omnifunc=syntaxcomplete#Complete
+set completeopt=longest,menuone
+
+
+"===========================================================================
+"syntastic settings
+"===========================================================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+colorscheme monokai
+
+let g:used_javascript_libs='jquery,underscore,angularjs,jasmine'
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+" Search Configuration
+" ---------------------------------------
+"
+" Quick mapping to clear the highlighting
+" of previous search pattern matches
+nmap <leader>h :nohlsearch<cr>
+
+" highlight all occurences of a search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
