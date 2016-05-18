@@ -23,7 +23,8 @@ set fileencoding=utf-8
 " Stop vim from creating automatic backups
 set noswapfile
 set nobackup
-set nowb
+set nowritebackup
+set noundofile    " stop creating undo file 
 
 " replace tabs with spaces "
 set expandtab
@@ -86,8 +87,14 @@ set lazyredraw
 :imap <c-u> <esc>viwUi
 :nmap <c-u> viwU
 
+" make 0 , to go to begining of line ( first character)
+nmap 0 ^
+
+"map ctrl-s to write to file
+nmap <c-s> :w <cr>
+
 " my leader key
-:let mapleader = ","
+:let mapleader = "\<Space>"
 
 " Unmap the arrow keys
 no <down> <Nop>
@@ -185,6 +192,8 @@ let NERDTreeShowHidden = 1
 "ctrlp
 "============================================================================
 let g:ctrlp_map = '<c-p>'
+let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+let g:ctrlp_use_caching = 0
 let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit':  'BrightHighlightOff', }
 
 function BrightHighlightOn()
@@ -252,3 +261,26 @@ if has("win32unix")
     let &t_te.="\e[0 q"
 endif
 
+nmap <leader>vr :sp $MYVIMRC<cr>
+nmap <leader>so :source $MYVIMRC<cr>
+
+imap jk <esc>
+imap kj <esc>
+
+
+"autocommands
+" Bind `q` to close the buffer for help files
+autocmd Filetype help nnoremap <buffer> q :q<CR>
+
+" Pre-populate a split command with the current directory
+nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+
+" Edit your vimrc in a new tab
+nmap <leader>vi :tabedit ~/.vimrc<cr>
+
+" Copy the entire buffer into the system register
+nmap <leader>co ggVG*y
+
+" Move up and down by visible lines if current line is wrapped
+nmap j gj
+nmap k gk

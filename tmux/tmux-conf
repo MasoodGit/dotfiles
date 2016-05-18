@@ -22,7 +22,11 @@ set-option  -g status-bg "#aaaaaa"
 set-option -g status-left-length 50
 set-option -g status-right "#(date '+%a, %b %d - %I:%M')"
 
+set-environment -g CHERE_INVOKING 1
+
 bind-key - split-window -v -c'#{pane_current_path}'
+bind-key \ split-window -h -c'#{pane_current_path}'
+
 bind-key \ split-window -h -c'#{pane_current_path}'
 
 # Fine adjustment (1 or 2 cursor cells per bump)

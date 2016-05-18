@@ -91,6 +91,9 @@ alias dd="cd /cygdrive/d"
 alias cc="cd /cygdrive/d/CodeBase/remote/frontend/src"
 alias ccb="cd /cygdrive/d/ConnectedCareBackEnd"
 alias cls=clear
+alias vc="vim ~/.vimrc"
+alias vz="vim ~/.zshrc"
+alias vb="vim ~/.babunrc"
 #alias ls='ls -la'
 function ct () {
   cc
