@@ -1,3 +1,9 @@
+# use vim as the visual editor
+export VISUAL='vim'
+export EDITOR=$VISUAL
+
+
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -5,7 +11,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="cobalt2"
+ZSH_THEME="cjt"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,8 +55,7 @@ ZSH_THEME="cobalt2"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
+plugins=(gitfast zsh-syntax-highligthing)
 # User configuration
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -91,11 +96,21 @@ alias dd="cd /cygdrive/d"
 alias cc="cd /cygdrive/d/CodeBase/remote/frontend/src"
 alias ccb="cd /cygdrive/d/ConnectedCareBackEnd"
 alias cls=clear
-alias vc="vim ~/.vimrc"
-alias vz="vim ~/.zshrc"
-alias vb="vim ~/.babunrc"
+alias ev="vim ~/.vimrc"
+alias ez="vim ~/.zshrc"
+alias eb="vim ~/.babunrc"
 #alias ls='ls -la'
 function ct () {
   cc
   vim 
+}
+
+compdef g=git
+
+function g {
+  if [[ $# -gt 0 ]]; then
+    git "$@"
+  else
+    git status --short --branch
+  fi
 }
