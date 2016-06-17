@@ -159,6 +159,7 @@ Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'claco/jasmine.vim'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'KabbAmine/gulp-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

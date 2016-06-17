@@ -1,0 +1,16 @@
+.git/
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+reportcoverage/
+.DS_Store
+.idea
+build
+dist
+ci.build
+ccApp.build
+ccUploadApp.build
+ccLauncherApp.build
+
