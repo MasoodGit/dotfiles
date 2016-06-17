@@ -1,0 +1,36 @@
+[push]
+	default = upstream 
+[core]
+	trustctime = false
+	editor = vim
+	filemode = false
+	autocrlf = input
+[color]
+	ui = true
+[merge]
+	tool = vimdiff
+[mergetool]
+	keeptemporaries = false
+	keepbackups = false
+	prompt = false
+	trustexitcode = false
+[fetch]
+  prune = true
+[alias]
+	last = log -1 --stat
+	cp = cherry-pick
+	co = checkout
+	cl = clone
+	ci = commit
+	st = status -sb
+	br = branch
+	uncommit = reset --soft HEAD^
+  unstage = reset
+	dc = diff --cached
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+  ls = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s' -130
+  glog = log -E -i --grep
+  cls = co ccLauncher_index.html ccUpload_index.html index.html
+[user]
+	name = Masood_Alam
+	email = mohamed.masood.alam@philips.com
