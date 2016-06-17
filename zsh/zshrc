@@ -94,9 +94,12 @@ source $ZSH/oh-my-zsh.sh
 .  ~/z.sh.js
 
 # alias for moving to code base
-alias dd="cd /cygdrive/d"
-alias cc="cd /cygdrive/d/CodeBase/remote/frontend/src"
-alias ccb="cd /cygdrive/d/ConnectedCareBackEnd"
+#alias dd="cd /cygdrive/d"
+#alias cc="cd /cygdrive/d/CodeBase/remote/frontend/src"
+#alias ccb="cd /cygdrive/d/ConnectedCareBackEnd"
+alias dd="cd /vagrant/vagrant_data"
+alias cc="cd /vagrant/vagrant_data/CodeBase/remote/frontend/src"
+alias ccb="cd /vagrant/vagrant_data/ConnectedCareBackEnd"
 alias cls=clear
 alias ev="vim ~/.vimrc"
 alias ez="vim ~/.zshrc"
@@ -115,14 +118,4 @@ alias tk="tmux kill-session -t"
 function ct () {
   cc
   vim
-}
-
-compdef g=git
-
-function g {
-  if [[ $# -gt 0 ]]; then
-    git "$@"
-  else
-    git status --short --branch
-  fi
 }
